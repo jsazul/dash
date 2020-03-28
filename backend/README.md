@@ -1,0 +1,69 @@
+# #Session 
+* **#Login** `(POST: /session/)`
+* **#Logout** `(DELETE: /session/)`
+
+
+****
+
+# #Busca 
+* **#search Content** `(GET: /search/?s=term)`
+
+****
+
+# Series
+* **Add** `(POST: /tvshow/)`
+* **List All** `(GET: /tvshow/)`
+* **Get data** `(GET: /tvshow/:idthemovie/)`
+* **Delete** `(DELETE: /tvshow/:idthemovie/)`
+* **Seasson**
+    * **Add New** `(POST: /tvshow/:idthemovie/seasson)`
+    * **List Only** `(GET: /tvshow/:idthemovie/seasson)`
+    * **Delete** `(DELETE: /tvshow/:idthemovie/seasson/:numberseasson/)`
+    * **Update data** `(PUT: /tvshow/:idthemovie/seasson/:numberseasson/)`
+    * **episodes**
+        * **list** `(GET: /tvshow/:idthemovie/seasson/:numberseasson/episode)`
+        * **Add New** `(POST: /tvshow/:idthemovie/seasson/:numberseasson/episode)`
+        * **Deletar** `(DELETE: /tvshow/:idthemovie/seasson/:numberseasson/episode)`
+        * **Update** `(PUT: /tvshow/:idthemovie/seasson/:numberseasson/episode)`
+- **Links**
+    * **Add links** `(POST: /tvshow/:idthemovie/link/)`
+    * **Add list of links** `(POST: /tvshow/:idthemovie/links/)`
+    * **remove_link** `(DELETE: /tvshow/:idthemovie/link/:seasson/:episode/:link)`
+    * **Edit** `(PUT: /tvshow/:idthemovie/link/:seasson/:episode/:link)`
+
+# Seassons
+* **List** `(GET: /seassons/)`
+
+# Episodes
+* **List** `(GET: /episodes/)`
+
+****
+
+# #Filmes
++ **#List** `(GET: /movie/)`
++ **#Add** `(POST: /movie/)`
+- **#Get Data** `(GET: /movie/:idthemovie/)`
++ **#Delete** `(DELETE: /movie/:idthemovie/)`
+* **#Update** `(PUT: /movie/:idthemovie/)`
+- **Links**
+    * **#List Only** `(GET: /movie/:idthemovie/link/)`
+    * **#Add links** `(POST: /movie/:idthemovie/link/)`
+    * **#remove_link** `(DELETE: /movie/:idthemovie/link/)`
+    * **#Edit** `(PUT: /movie/:idthemovie/link/)`
+
+
+****
+
+# #Dominios
+* **#List** `(GET: /domains/)`
+* **#Adiciona**
+    * **#Principal / SubDominio** `(POST: /domains/)`
+* **#Check Status** `(PACTH: /domains/:iddomain)`
+* **#Select Default** `(PUT: /domains/:iddomain)`
+* **#Delete Domain** `(DELETE: /domains/:iddomain)`
+
+****
+# Usuarios
+* **Create Accont** `(POST: /users/)`
+* **List Users** `(GET: /users/)`
+* **Search Users** `(GET: /users/search/)`

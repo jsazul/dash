@@ -1,0 +1,1 @@
+mongodump --host embed-shard-0/embed-shard-00-00-4pp2l.gcp.mongodb.net:27017,embed-shard-00-01-4pp2l.gcp.mongodb.net:27017,embed-shard-00-02-4pp2l.gcp.mongodb.net:27017 --ssl --username oi --password ktN1fK3yW44DgBBh --authenticationDatabase admin --forceTableScan

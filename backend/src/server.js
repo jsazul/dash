@@ -1,7 +1,7 @@
 require('custom-env').env('key');
 
-//const database = require('./database')
-//database.connection();
+const database = require('./database')
+database.connection();
 
 const app = require('./app');
 

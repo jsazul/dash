@@ -5,31 +5,41 @@ require('custom-env').env('test.key');
 describe('ROUTE: Domain', () => {
     it('GET:: should be able to list domains for a user.', async () => {
         const response = await request(app)
-            .get('/domain');
+            .get('/domain')
+            .set('auth_access', 'ZmRzYXNkc2E=')
+            .set('auth_token', 'ZmRzYXNkc2E=');
 
         expect(response.body.page).toBe('domain-get');
     });
     it('POST:: should be able to add a new domain.', async () => {
         const response = await request(app)
-            .post('/domain');
+            .post('/domain')
+            .set('auth_access', 'ZmRzYXNkc2E=')
+            .set('auth_token', 'ZmRzYXNkc2E=');
 
         expect(response.body.page).toBe('domain-post');
     });
     it('PATCH:: should be able to check a domain.', async () => {
         const response = await request(app)
-            .patch('/domain/:code_domain/');
+            .patch('/domain/:code_domain/')
+            .set('auth_access', 'ZmRzYXNkc2E=')
+            .set('auth_token', 'ZmRzYXNkc2E=');
 
         expect(response.body.page).toBe('domain-patch');
     });
     it('PUT:: should be able to select a domain for default.', async () => {
         const response = await request(app)
-            .put('/domain/:code_domain/');
+            .put('/domain/:code_domain/')
+            .set('auth_access', 'ZmRzYXNkc2E=')
+            .set('auth_token', 'ZmRzYXNkc2E=');
 
         expect(response.body.page).toBe('domain-put');
     });
     it('DELETE:: should be able to delete a domain.', async () => {
         const response = await request(app)
-            .delete('/domain/:code_domain/');
+            .delete('/domain/:code_domain/')
+            .set('auth_access', 'ZmRzYXNkc2E=')
+            .set('auth_token', 'ZmRzYXNkc2E=');
 
         expect(response.body.page).toBe('domain-delete');
     });

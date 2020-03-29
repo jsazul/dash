@@ -16,7 +16,6 @@ routes.use(UserRoute);
 routes.use(SessionValidator.validation);
 
 
-routes.use(auth_access);
 
 
 

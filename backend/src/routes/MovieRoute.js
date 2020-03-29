@@ -2,22 +2,45 @@ const express = require('express');
 
 const MovieRoute = express.Router();
 
-const teste = (req, res) => {
-    res.status(200).json({code: req.params})
-};
+
+MovieRoute.get('/movie/', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-get'})
+});
+MovieRoute.post('/movie/', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-post'})
+});
+
+MovieRoute.get('/movie/:idThemovie', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-get'})
+});
+MovieRoute.delete('/movie/:idThemovie', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-delete'})
+});
+MovieRoute.put('/movie/:idThemovie', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-put'})
+});
 
 
-MovieRoute.get('/movie/', teste);
-MovieRoute.post('/movie/', teste);
-
-MovieRoute.get('/movie/:idThemovie', teste);
-MovieRoute.delete('/movie/:idThemovie', teste);
-MovieRoute.put('/movie/:idThemovie', teste);
-
-
-MovieRoute.get('/movie/:idThemovie/link/', teste);
-MovieRoute.post('/movie/:idThemovie/link/', teste);
-MovieRoute.delete('/movie/:idThemovie/link/:linkCode/', teste);
-MovieRoute.put('/movie/:idThemovie/link/:linkCode/', teste);
+MovieRoute.get('/movie/:idThemovie/link/', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-get'})
+});
+MovieRoute.post('/movie/:idThemovie/link/', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-post'})
+});
+MovieRoute.delete('/movie/:idThemovie/link/:linkCode/', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-delete'})
+});
+MovieRoute.put('/movie/:idThemovie/link/:linkCode/', (req, res) => {
+    const query = req.query;
+    res.status(200).json({page: 'movie-put'})
+});
 
 module.exports = MovieRoute;

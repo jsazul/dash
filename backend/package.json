@@ -1,6 +1,6 @@
 {
   "name": "api.jsazul.blue",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Api for jsazul",
   "main": "src/server.js",
   "scripts": {

@@ -1,13 +1,20 @@
 const request = require('supertest');
 const app = require('../../src/app');
+const database = require('../../src/database');
 require('custom-env').env('test.key');
 
+beforeAll(async () => {
+    await database.connectionTest();
+});
+afterAll(async () => {
+    database.close();
+});
 describe('ROUTE: User', () => {
     it('POST:: should be able to register a new user', async () => {
         const response = await request(app)
-            .post('/user');
+            .post('/user/resgister');
 
-        expect(response.status).toBe(400);
+        expect(response.body).toBe({});
     });
     it('GET:: should be able to list all user', async () => {
         const response = await request(app)

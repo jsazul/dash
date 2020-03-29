@@ -1,5 +1,5 @@
 const {errors} = require('celebrate');
-const sessionValidator = require('../validator/sessionValidator');
+const authMiddlewares = require('../middlewares/auth');
 
 const SessionRoute = require('./SessionRoute');
 const SearchRoute = require('./SearchRoute');
@@ -8,12 +8,10 @@ const DomainRoute = require('./DomainRoute');
 const UserRoute = require('./UserRoute');
 
 module.exports = app => {
-    app.use(SessionRoute)
+    app.use('/session', SessionRoute)
     app.use('/user', UserRoute);
     
-    app.use(sessionValidator.validation);
-    
-    app.use(SearchRoute);
+    app.use('/search', authMiddlewares, SearchRoute);
     app.use(MovieRoute);
     app.use(DomainRoute);
     

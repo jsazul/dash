@@ -4,7 +4,7 @@ const userValidator = require('../validator/userValidator');
 
 const UserRoute = express.Router();
 
-UserRoute.post('/', userValidator.register, userController.register);
+UserRoute.post('/resgister', userValidator.register, userController.register);
 UserRoute.get('/', (req, res) => {
     res.status(200).json({page: 'user-get'})
 });

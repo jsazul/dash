@@ -1,11 +1,12 @@
 const express = require('express');
+const SessionValidator = require('../validator/SessionValidator');
 
 const SessionRoute = express.Router();
 
-SessionRoute.post('/session/', (req, res) => {
+SessionRoute.post('/session/', SessionValidator.authenticate, (req, res) => {
     res.status(200).json({page: 'seassion-post'})
 });
-SessionRoute.delete('/session/', (req, res) => {
+SessionRoute.delete('/session/', SessionValidator.logOut, (req, res) => {
     res.status(200).json({page: 'seassion-delete'})
 });
 

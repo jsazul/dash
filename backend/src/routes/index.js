@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = express();
 const {errors} = require('celebrate');
+const SessionValidator = require('../validator/SessionValidator');
 
 const SessionRoute = require('./SessionRoute');
 const SearchRoute = require('./SearchRoute');
@@ -10,10 +11,19 @@ const UserRoute = require('./UserRoute');
 
 
 routes.use(SessionRoute)
+routes.use(UserRoute);
+
+routes.use(SessionValidator.validation);
+
+
+routes.use(auth_access);
+
+
+
+
 routes.use(SearchRoute);
 routes.use(MovieRoute);
 routes.use(DomainRoute);
-routes.use(UserRoute);
 
 
 

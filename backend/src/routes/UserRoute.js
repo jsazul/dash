@@ -2,12 +2,14 @@ const express = require('express');
 
 const UserRoute = express.Router();
 
-const teste = (req, res) => {
-    res.status(200).json({code: req.params})
-};
-
-UserRoute.post('/user/', teste);
-UserRoute.get('/user/', teste);
-UserRoute.get('/user/search/', teste);
+UserRoute.post('/user/', (req, res) => {
+    res.status(200).json({page: 'user-post'})
+});
+UserRoute.get('/user/', (req, res) => {
+    res.status(200).json({page: 'user-get'})
+});
+UserRoute.get('/user/search/', (req, res) => {
+    res.status(200).json({page: 'user-search'})
+});
 
 module.exports = UserRoute;

@@ -7,7 +7,7 @@ describe('ROUTE: User', () => {
         const response = await request(app)
             .post('/user');
 
-        expect(response.body.page).toBe('user-post');
+        expect(response.status).toBe(400);
     });
     it('GET:: should be able to list all user', async () => {
         const response = await request(app)

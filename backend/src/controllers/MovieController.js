@@ -114,33 +114,6 @@ module.exports = {
         }
 
     },
-    getLink: async (req, res) => {
-        const {idThemovie} = req.params,
-        userType = req.userType;
-
-        if(userType!==1)
-            return res.status(400).json({err: 'access denied'})
-
-
-        const movie = await Movie.findOne({themoviedb: idThemovie, tipo: 'filme'}).select('+pass');
-
-        if(!movie)
-            return res.status(400).json({err: 'not found'})
-        const movieFinal = JSON.parse(JSON.stringify(movie));
-
-        const stream = {
-            dublado: movieFinal.stream.dublado || false,
-            legendado: movieFinal.stream.legendado || false,
-            nacional: movieFinal.stream.nacional || false
-        };
-        const download = {
-            dublado: movieFinal.download.dublado || false,
-            legendado: movieFinal.download.legendado || false,
-            nacional: movieFinal.download.nacional || false
-        };
-
-        return res.status(200).json({stream, download});
-    },
     create: async (req, res) => {
         const content = req.body,
             userType = req.userType,
@@ -194,7 +167,16 @@ module.exports = {
         if(userType!==1)
             return res.status(400).json({err: 'access denied'})
 
-            
-        res.status(200).json({});
+        const filter = {themoviedb: idThemovie, tipo: 'filme'};
+        content.user = userCode;
+
+        const movie = await Movie.updateOne(filter, content);
+        
+        if(movie.n===0)
+            return res.status(400).json({err: 'not found'})
+        
+        content.user = undefined;
+
+        res.status(200).json(content);
     }
 }

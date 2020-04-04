@@ -11,11 +11,6 @@ module.exports = {
             idThemovie: Joi.number().required()
         })
     }),
-    getLink: celebrate({
-        [Segments.PARAMS]: Joi.object().keys({
-            idThemovie: Joi.number().required()
-        })
-    }),
     create: celebrate({
         [Segments.BODY]: Joi.object().keys({
             themoviedb: Joi.number().required(),

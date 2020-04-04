@@ -1,31 +1,27 @@
 const express = require('express');
-const MoviesController = require('../controllers/MoviesController');
+const MovieController = require('../controllers/MovieController');
+const MovieLinkController = require('../controllers/MovieLinkController');
 
-const MoviesValidator = require('../validator/MoviesValidator');
+const MovieValidator = require('../validator/MovieValidator');
+const MovieLinkValidator = require('../validator/MovieLinkValidator');
 
 const MovieRoute = express.Router();
 
 
-MovieRoute.get('/', MoviesValidator.index, MoviesController.index);
-MovieRoute.post('/', MoviesValidator.create, MoviesController.create);
+MovieRoute.get('/', MovieValidator.index, MovieController.index);
+MovieRoute.post('/', MovieValidator.create, MovieController.create);
 
-MovieRoute.get('/:idThemovie', MoviesValidator.data, MoviesController.data);
-MovieRoute.delete('/:idThemovie', MoviesValidator.delete, MoviesController.delete);
-MovieRoute.put('/:idThemovie', MoviesValidator.update, MoviesController.update);
+MovieRoute.get('/:idThemovie', MovieValidator.data, MovieController.data);
+MovieRoute.delete('/:idThemovie', MovieValidator.delete, MovieController.delete);
+MovieRoute.put('/:idThemovie', MovieValidator.update, MovieController.update);
 
 
-MovieRoute.get('/:idThemovie/link/', MoviesValidator.getLink, MoviesController.getLink);
-MovieRoute.post('/:idThemovie/link/', (req, res) => {
-    const query = req.query;
-    res.status(200).json({page: 'movie-post'})
-});
-MovieRoute.delete('/:idThemovie/link/:linkCode/', (req, res) => {
-    const query = req.query;
-    res.status(200).json({page: 'movie-delete'})
-});
-MovieRoute.put('/:idThemovie/link/:linkCode/', (req, res) => {
-    const query = req.query;
-    res.status(200).json({page: 'movie-put'})
+MovieRoute.get('/:idThemovie/link/', MovieLinkValidator.data, MovieLinkController.data);
+MovieRoute.post('/:idThemovie/link/', MovieLinkValidator.add, MovieLinkController.add);
+MovieRoute.delete('/:idThemovie/link/:type/:language/:serverCode/', MovieLinkValidator.delete, MovieLinkController.delete);
+MovieRoute.put('/:idThemovie/link/:serverCode/', (req, res) => {
+    const {idThemovie, serverCode} = req.params;
+    res.status(200).json({page: 'movie-put', idThemovie, serverCode})
 });
 
 module.exports = MovieRoute;

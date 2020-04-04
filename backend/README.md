@@ -1,5 +1,5 @@
 # #Session 
-* **#&*ogin** `(POST: /session/)`
+* **🍆ogin** `(POST: /session/)`
 
 
 ****
@@ -39,15 +39,15 @@
 ****
 
 # #Filmes
-+ **#&*List** `(GET: /movie/)`
-+ **#&*Add** `(POST: /movie/)`
-- **#&*Get Data** `(GET: /movie/:idthemovie/)`
-+ **#&*Delete** `(DELETE: /movie/:idthemovie/)`
-* **#Update** `(PUT: /movie/:idthemovie/)`
++ **🍆List** `(GET: /movie/)`
++ **🍆Add** `(POST: /movie/)`
+- **🍆Get Data** `(GET: /movie/:idthemovie/)`
++ **🍆Delete** `(DELETE: /movie/:idthemovie/)`
+* **🍆Update** `(PUT: /movie/:idthemovie/)`
 - **Links**
-    * **#&*List Only** `(GET: /movie/:idthemovie/link/)`
+    * **🍆List Only** `(GET: /movie/:idthemovie/link/)`
     * **#Add links** `(POST: /movie/:idthemovie/link/)`
-    * **#remove_link** `(DELETE: /movie/:idthemovie/link/)`
+    * **🍆Remove_link** `(DELETE: /movie/:idthemovie/link/:type/:language/:serverCode/)`
     * **#Edit** `(PUT: /movie/:idthemovie/link/)`
 
 
@@ -63,7 +63,7 @@
 
 ****
 # Usuarios
-* **Create Accont** `(POST: /users/)`
+* **🍆Create Accont** `(POST: /users/)`
 * **List Users** `(GET: /users/)`
 * **Search Users** `(GET: /users/search/)`
 

@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     },
     type: {
         type: Number,
-        default: 5
+        default: 1
     },
     domainDdefault: {
         type: String,

@@ -7,10 +7,7 @@ const MovieRoute = express.Router();
 
 
 MovieRoute.get('/', MoviesValidator.index, MoviesController.index);
-MovieRoute.post('/', (req, res) => {
-    const query = req.query;
-    res.status(200).json({page: 'movie-post'})
-});
+MovieRoute.post('/', MoviesValidator.create, MoviesController.create);
 
 MovieRoute.get('/:idThemovie', MoviesValidator.data, MoviesController.data);
 MovieRoute.delete('/:idThemovie', (req, res) => {
@@ -23,10 +20,7 @@ MovieRoute.put('/:idThemovie', (req, res) => {
 });
 
 
-MovieRoute.get('/:idThemovie/link/', (req, res) => {
-    const query = req.query;
-    res.status(200).json({page: 'movie-get'})
-});
+MovieRoute.get('/:idThemovie/link/', MoviesValidator.getLink, MoviesController.getLink);
 MovieRoute.post('/:idThemovie/link/', (req, res) => {
     const query = req.query;
     res.status(200).json({page: 'movie-post'})

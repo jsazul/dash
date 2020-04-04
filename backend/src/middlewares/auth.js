@@ -4,13 +4,17 @@ module.exports = (req, res, next) => {
     const authHeader = req.headers.authorization;
     
 
-    if(!authHeader)
-        return res.status(401).json({error: 'no token provided'});
+    if(!authHeader){
+        req.userType = 5;
+        return next();
+    }
 
     const parts = authHeader.split(' ');
 
-    if(!parts.length === 2)
-        return res.status(401).json({error: 'Token error'});
+    if(!parts.length === 2){
+        req.userType = 5;
+        return next();
+    }
 
     const [scheme, token] = parts;
 

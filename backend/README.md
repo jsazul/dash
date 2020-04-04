@@ -40,9 +40,9 @@
 
 # #Filmes
 + **#&*List** `(GET: /movie/)`
-+ **#Add** `(POST: /movie/)`
++ **#&*Add** `(POST: /movie/)`
 - **#&*Get Data** `(GET: /movie/:idthemovie/)`
-+ **#Delete** `(DELETE: /movie/:idthemovie/)`
++ **#&*Delete** `(DELETE: /movie/:idthemovie/)`
 * **#Update** `(PUT: /movie/:idthemovie/)`
 - **Links**
     * **#&*List Only** `(GET: /movie/:idthemovie/link/)`

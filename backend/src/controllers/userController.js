@@ -19,7 +19,7 @@ module.exports = {
 
             return res.status(201).json({
                 user,
-                token: generateToken({id: user._id, type: user.type})
+                token: generateToken({id: user._id, type: user.type, user: user.user})
             })
         } catch (err) {
             return res.status(400).json({error: err.message})

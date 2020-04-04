@@ -65,7 +65,7 @@ module.exports = {
         const {idThemovie} = req.params,
         userType = req.userType;
 
-        const movie = await Movie.findOne({themoviedb: idThemovie}).select('+pass');
+        const movie = await Movie.findOne({themoviedb: idThemovie, tipo: 'filme'}).select('+pass');
 
         if(!movie)
             return res.status(400).json({err: 'not found'})
@@ -122,7 +122,7 @@ module.exports = {
             return res.status(400).json({err: 'access denied'})
 
 
-        const movie = await Movie.findOne({themoviedb: idThemovie}).select('+pass');
+        const movie = await Movie.findOne({themoviedb: idThemovie, tipo: 'filme'}).select('+pass');
 
         if(!movie)
             return res.status(400).json({err: 'not found'})
@@ -141,13 +141,34 @@ module.exports = {
 
         return res.status(200).json({stream, download});
     },
-    create: (req, res) => {
-        const userType = req.userType;
+    create: async (req, res) => {
+        const content = req.body,
+            userType = req.userType,
+            userCode = req.userCode;
 
         if(userType!==1)
-            return res.status(400).json({err: 'access denied'})
+            return res.status(401).json({err: 'access denied'})
 
-        res.status(200).json({})
+
+        const count = await Movie.countDocuments({tipo: 'filme', themoviedb: req.body.themoviedb});
+        if(count!==0)
+            return res.status(400).json({statusCode: 400, error: "Bad Request", message: 'movie existed'})    
+
+            
+        content.user = userCode;
+        content.trailer = content.trailer ? `https://www.youtube.com/embed/${content.trailer}` : undefined;
+
+        const movie = await new Movie(content).save();
+
+        movie.user = undefined;
+        movie.file = undefined;
+        movie.backup = undefined;
+        movie.torrent = undefined;
+        movie.user = undefined;
+        movie.tipo = undefined;
+        movie.__v = undefined;
+
+        res.status(200).json({movie})
     },
     delete: async (req, res) => {
         const {idThemovie} = req.params,
@@ -163,5 +184,17 @@ module.exports = {
         await ProcessarMovies.deleteMany(filter);
 
         res.status(204).json();
+    },
+    update: async (req, res) => {
+        const {idThemovie} = req.params,
+            content = req.body,
+            userType = req.userType,
+            userCode = req.userCode;
+        
+        if(userType!==1)
+            return res.status(400).json({err: 'access denied'})
+
+            
+        res.status(200).json({});
     }
 }

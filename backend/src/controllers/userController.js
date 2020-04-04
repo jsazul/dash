@@ -15,10 +15,11 @@ module.exports = {
 
             const user = await new User(req.body).save();
             user.pass = undefined;
+            user.__v = undefined;
 
             return res.status(201).json({
                 user,
-                token: generateToken({id: user._id})
+                token: generateToken({id: user._id, type: user.type})
             })
         } catch (err) {
             return res.status(400).json({error: err.message})

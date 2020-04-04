@@ -20,10 +20,11 @@ module.exports = {
             return res.status(400).json({err: 'invalid'})
 
             user.pass = undefined;
+            user.__v = undefined;
 
         return res.status(200).json({
             user,
-            token: generateToken({id: user._id})
+            token: generateToken({id: user._id, type: user.type})
         })
     }
 }

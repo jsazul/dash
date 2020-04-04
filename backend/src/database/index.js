@@ -45,7 +45,7 @@ module.exports = {
             useCreateIndex: true 
         });
 
-        const db = mongoose.connection;
+        const db = mongoose.connection;     
         
         db.on('connected', () => {});
 
@@ -61,5 +61,6 @@ module.exports = {
     },
     close: async () => {
         mongoose.disconnect();
-    }
+    },
+    mongoose: mongoose
 }

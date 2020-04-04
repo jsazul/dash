@@ -1,10 +1,12 @@
 const request = require('supertest');
 const app = require('../../src/app');
+require('../../src/models/user');
 const database = require('../../src/database');
 require('custom-env').env('test.key');
 
 beforeAll(async () => {
     await database.connectionTest();
+    database.mongoose.model('Users').collection.drop();
 });
 afterAll(async () => {
     database.close();

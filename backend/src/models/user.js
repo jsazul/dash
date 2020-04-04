@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: Number,
+        default: 5
+    },
     domainDdefault: {
         type: String,
         select: false,

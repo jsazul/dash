@@ -12,7 +12,7 @@ module.exports = app => {
     app.use('/user', UserRoute);
     
     app.use('/search', authMiddlewares, SearchRoute);
-    app.use(MovieRoute);
+    app.use('/movie', authMiddlewares, MovieRoute);
     app.use(DomainRoute);
     
     app.use(errors());

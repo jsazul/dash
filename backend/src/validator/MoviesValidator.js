@@ -28,5 +28,10 @@ module.exports = {
             ano: Joi.number().required(),
             categorias: Joi.array().required()
         })
+    }),
+    delete: celebrate({
+        [Segments.PARAMS]: Joi.object().keys({
+            idThemovie: Joi.number().required()
+        })
     })
 }

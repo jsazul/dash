@@ -1,6 +1,5 @@
 # #Session 
-* **#Login** `(POST: /session/)`
-* **#Logout** `(DELETE: /session/)`
+* **#&*ogin** `(POST: /session/)`
 
 
 ****
@@ -40,13 +39,13 @@
 ****
 
 # #Filmes
-+ **#List** `(GET: /movie/)`
++ **#&*List** `(GET: /movie/)`
 + **#Add** `(POST: /movie/)`
-- **#Get Data** `(GET: /movie/:idthemovie/)`
+- **#&*Get Data** `(GET: /movie/:idthemovie/)`
 + **#Delete** `(DELETE: /movie/:idthemovie/)`
 * **#Update** `(PUT: /movie/:idthemovie/)`
 - **Links**
-    * **#List Only** `(GET: /movie/:idthemovie/link/)`
+    * **#&*List Only** `(GET: /movie/:idthemovie/link/)`
     * **#Add links** `(POST: /movie/:idthemovie/link/)`
     * **#remove_link** `(DELETE: /movie/:idthemovie/link/)`
     * **#Edit** `(PUT: /movie/:idthemovie/link/)`
@@ -67,3 +66,7 @@
 * **Create Accont** `(POST: /users/)`
 * **List Users** `(GET: /users/)`
 * **Search Users** `(GET: /users/search/)`
+
+
+
+mongorestore --host embed-shard-0/embed-shard-00-00-4pp2l.gcp.mongodb.net:27017,embed-shard-00-01-4pp2l.gcp.mongodb.net:27017,embed-shard-00-02-4pp2l.gcp.mongodb.net:27017 --ssl --username dev --password XIcB9W0lzRS1nXRQ --authenticationDatabase admin

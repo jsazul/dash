@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const generateToken = require('../utils/generateToken');
 require('../models/movie');
+require('../models/listarLinksMovie');
+require('../models/ProcessarLinksMovie');
 
 const Movie = mongoose.model('Movie');
+const LinksMovies = mongoose.model('LinksMovies');
+const ProcessarMovies = mongoose.model('ProcessarMovies');
 
 module.exports = {
     index: async (req, res) => {
@@ -144,5 +148,20 @@ module.exports = {
             return res.status(400).json({err: 'access denied'})
 
         res.status(200).json({})
+    },
+    delete: async (req, res) => {
+        const {idThemovie} = req.params,
+            userType = req.userType;
+
+        if(userType!==1)
+            return res.status(400).json({err: 'access denied'})
+
+        const filter = {themoviedb: idThemovie, tipo: 'filme'};
+
+        await LinksMovies.deleteMany(filter);
+        await Movie.deleteMany(filter);
+        await ProcessarMovies.deleteMany(filter);
+
+        res.status(204).json();
     }
 }

@@ -10,10 +10,7 @@ MovieRoute.get('/', MoviesValidator.index, MoviesController.index);
 MovieRoute.post('/', MoviesValidator.create, MoviesController.create);
 
 MovieRoute.get('/:idThemovie', MoviesValidator.data, MoviesController.data);
-MovieRoute.delete('/:idThemovie', (req, res) => {
-    const query = req.query;
-    res.status(200).json({page: 'movie-delete'})
-});
+MovieRoute.delete('/:idThemovie', MoviesValidator.delete, MoviesController.delete);
 MovieRoute.put('/:idThemovie', (req, res) => {
     const query = req.query;
     res.status(200).json({page: 'movie-put'})

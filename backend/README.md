@@ -10,8 +10,8 @@
 ****
 
 # Series
-* **Add** `(POST: /tvshow/)`
 * **List All** `(GET: /tvshow/)`
+* **Add** `(POST: /tvshow/)`
 * **Get data** `(GET: /tvshow/:idthemovie/)`
 * **Delete** `(DELETE: /tvshow/:idthemovie/)`
 * **Seasson**
@@ -31,10 +31,10 @@
     * **Edit** `(PUT: /tvshow/:idthemovie/link/:seasson/:episode/:link)`
 
 # Seassons
-* **List** `(GET: /seassons/)`
+* **List** `(GET: /tvshow/list/seassons/)`
 
 # Episodes
-* **List** `(GET: /episodes/)`
+* **List** `(GET: /tvshow/list/episodes/)`
 
 ****
 
@@ -64,7 +64,8 @@
 ****
 # Usuarios
 * **🍆Create Accont** `(POST: /users/)`
-* **List Users** `(GET: /users/)`
+* **🍆Update Status** `(POST: /users/:userId/)`
+* **🍆List Users** `(GET: /users/)`
 * **Search Users** `(GET: /users/search/)`
 
 

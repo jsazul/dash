@@ -46,7 +46,7 @@
 * **🍆Update** `(PUT: /movie/:idthemovie/)`
 - **Links**
     * **🍆List Only** `(GET: /movie/:idthemovie/link/)`
-    * **#Add links** `(POST: /movie/:idthemovie/link/)`
+    * **🍆Add links** `(POST: /movie/:idthemovie/link/)`
     * **🍆Remove_link** `(DELETE: /movie/:idthemovie/link/:type/:language/:serverCode/)`
     * **#Edit** `(PUT: /movie/:idthemovie/link/)`
 

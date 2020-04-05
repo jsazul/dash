@@ -49,7 +49,8 @@ module.exports = {
         const filter = {themoviedb: idThemovie, tipo: 'filme'};
 
 
-        const movieLinks = await Movie.findOne(filter);
+        const movie = await Movie.findOne(filter);
+        const movieLinks = JSON.parse(JSON.stringify(movie));
 
 
         const serversList = await Servidor.find({tipo: "link"});
@@ -63,7 +64,7 @@ module.exports = {
             const domain = link.split('/')[2];
             var selected = servers.filter(server => domain==server.dominio)[0];
             selected = JSON.parse(JSON.stringify(selected));
-            
+            console.log(movieLinks);
             if(selected.stream===true){
                 if(selected.stream_dados.converter===false){
                     var streamLink = link;
@@ -71,14 +72,23 @@ module.exports = {
                     var id = link.split(selected.stream_dados.dados_converter.explode)[selected.stream_dados.dados_converter.numero_explode].replace(/embed-/g, '').replace(/.html/g, '');
                     var streamLink = selected.stream_dados.dados_converter.base.replace(/{ID_FILE}/g, id);
                 }
-                stream.tipeUpdate = movieLinks.stream[language]===null ? '$set' : '$push';
 
-                stream.update.push({
-                    servidor: selected.numero,
-                    nome_servidor: selected.nome,
-                    qualidade: quality,
-                    link: streamLink
-                })
+                if(movieLinks.stream[language]===null){
+                    movieLinks.stream[language] = [{
+                        servidor: selected.numero,
+                        nome_servidor: selected.nome,
+                        qualidade: quality,
+                        link: streamLink
+                    }]
+                } else {
+                    movieLinks.stream[language].push({
+                        servidor: selected.numero,
+                        nome_servidor: selected.nome,
+                        qualidade: quality,
+                        link: streamLink
+                    })
+                }
+
                 stream.add.push({
                     themoviedb: idThemovie,
                     servidor: selected.numero,
@@ -96,14 +106,23 @@ module.exports = {
                     var id = link.split(selected.download_dados.dados_converter.explode)[selected.download_dados.dados_converter.numero_explode].replace(/embed-/g, '').replace(/.html/g, '');
                     var downloadLink = selected.download_dados.dados_converter.base.replace(/{ID_FILE}/g, id);
                 }
-                download.tipeUpdate = movieLinks.download[language]===null ? '$set' : '$push';
 
-                download.update.push({
-                    servidor: selected.numero,
-                    nome_servidor: selected.nome,
-                    qualidade: quality,
-                    link: downloadLink
-                })
+                if(movieLinks.download[language]===null){
+                    movieLinks.download[language] = [{
+                        servidor: selected.numero,
+                        nome_servidor: selected.nome,
+                        qualidade: quality,
+                        link: downloadLink
+                    }]
+                } else {
+                    movieLinks.download[language].push({
+                        servidor: selected.numero,
+                        nome_servidor: selected.nome,
+                        qualidade: quality,
+                        link: downloadLink
+                    })
+                }
+
                 download.add.push({
                     themoviedb: idThemovie,
                     servidor: selected.numero,
@@ -119,16 +138,25 @@ module.exports = {
                     var backupLink = link;
                 } else {
                     var id = link.split(selected.backup_dados.dados_converter.explode)[selected.backup_dados.dados_converter.numero_explode];
-                    var downloadLink = selected.backup_dados.dados_converter.base.replace(/{ID_FILE}/g, id);
+                    var backupLink = selected.backup_dados.dados_converter.base.replace(/{ID_FILE}/g, id);
                 }
-                backup.tipeUpdate = movieLinks.backup[language]===null ? '$set' : '$push';
 
-                backup.update.push({
-                    servidor: selected.numero,
-                    nome_servidor: selected.nome,
-                    qualidade: quality,
-                    link: backupLink
-                })
+                if(movieLinks.backup[language]===null){
+                    movieLinks.backup[language] = [{
+                        servidor: selected.numero,
+                        nome_servidor: selected.nome,
+                        qualidade: quality,
+                        link: backupLink
+                    }]
+                } else {
+                    movieLinks.backup[language].push({
+                        servidor: selected.numero,
+                        nome_servidor: selected.nome,
+                        qualidade: quality,
+                        link: backupLink
+                    })
+                }
+
                 backup.add.push({
                     themoviedb: idThemovie,
                     servidor: selected.numero,
@@ -142,30 +170,21 @@ module.exports = {
             }
         })
 
-        const update = {};
+        const update = {[`$set`] : {}};
 
-        if(stream.update.length!==0){
-            if(update[`${stream.tipeUpdate}`]===undefined){
-                update[`${stream.tipeUpdate}`] = {};
-            }
-            update[`${stream.tipeUpdate}`][`stream.${language}`] = stream.update;
+        if(movieLinks.stream[language]!==null){
+            update[`$set`][`stream.${language}`] = movieLinks.stream[language];
         }
-        if(download.update.length!==0){
-            if(update[`${download.tipeUpdate}`]===undefined){
-                update[`${download.tipeUpdate}`] = {};
-            }
-            update[`${download.tipeUpdate}`][`download.${language}`] = download.update;
+        if(movieLinks.stream[language]!==null){
+            update[`$set`][`download.${language}`] = movieLinks.download[language];
         }
-        if(backup.update.length!==0){
-            if(update[`${backup.tipeUpdate}`]===undefined){
-                update[`${backup.tipeUpdate}`] = {};
-            }
-            update[`${backup.tipeUpdate}`][`backup.${language}`] = backup.update;
+        if(movieLinks.stream[language]!==null){
+            update[`$set`][`backup.${language}`] = movieLinks.backup[language];
         }
 
         await Movie.updateOne(filter, update);
         await LinksMovies.insertMany([...stream.add, ...download.add, ...backup.add]);
-        res.status(205).json({stream: {[language]: stream.update}, download: {[language]: stream.update}, backup: {[language]: stream.update}});
+        res.status(205).json({stream: movieLinks.stream, download: movieLinks.download, backup: movieLinks.backup});
     },
     delete: async (req, res) => {
         const {idThemovie, type, language, serverCode} = req.params,

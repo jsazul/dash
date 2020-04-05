@@ -38,7 +38,7 @@ const LinksMoviesSchema = new mongoose.Schema({
     },
     api: {
       type: Object,
-      required: true,
+      required: false,
       default: {}
     },
     data: {

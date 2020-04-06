@@ -12,22 +12,10 @@ TvShowRoute.get('/list/seassons/', TvShowValidator.indexSeasson, TvShowControlle
 TvShowRoute.get('/list/episodes/', TvShowValidator.indexEpisode, TvShowController.indexEpisode);
 
 
-TvShowRoute.post('/', (req, res) => {
-    const {idThemovie} = req.params;
-    res.status(200).json({page: 'tvshow-post', idThemovie})
-});
-TvShowRoute.delete('/:idThemovie/', (req, res) => {
-    const {idThemovie} = req.params;
-    res.status(200).json({page: 'tvshow-Idthemovie-delete', idThemovie})
-});
-TvShowRoute.put('/:idThemovie/', (req, res) => {
-    const {idThemovie} = req.params;
-    res.status(200).json({page: 'tvshow-Idthemovie-put', idThemovie})
-});
-TvShowRoute.get('/:idThemovie/', (req, res) => {
-    const {idThemovie} = req.params;
-    res.status(200).json({page: 'tvshow-Idthemovie-get', idThemovie})
-});
+TvShowRoute.get('/:idThemovie/', TvShowValidator.data, TvShowController.data);
+TvShowRoute.post('/', TvShowValidator.create, TvShowController.create);
+TvShowRoute.delete('/:idThemovie/', TvShowValidator.delete, TvShowController.delete);
+TvShowRoute.put('/:idThemovie/', TvShowValidator.update, TvShowController.update);
 
 
 TvShowRoute.get('/:idThemovie/seasson/', (req, res) => {

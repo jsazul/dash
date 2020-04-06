@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const generateToken = require('../utils/generateToken');
 require('../models/movie');
 require('../models/listarLinksMovie');
-require('../models/ProcessarLinksMovie');
+require('../models/processarLinksMovie');
 
 const Movie = mongoose.model('Movie');
 const LinksMovies = mongoose.model('LinksMovies');
